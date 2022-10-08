@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { Category } from "./Entities/Category";
 import { Customer } from "./Entities/Customer";
+import { History } from "./Entities/History";
 import { Note } from "./Entities/Note";
 
 export const main = async () => {
@@ -14,7 +15,7 @@ export const main = async () => {
         "database": "edvisory",
         "synchronize": true,
         "logging": true,
-        "entities": [Customer,Note,Category],
+        "entities": [Customer,Note,Category,History],
     })
     console.log("connected");
     await dataSource.initialize()

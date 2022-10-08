@@ -8,7 +8,7 @@ history_orm.post('/history_orm/create',(req:Request,res:Response)=>{
         History.insert({
             customer_id: 1,
             note_id: 1,
-            date: Date.now(),
+            // date: Date.now(),
         })
         res.status(200).json({
             resultcode:20000,

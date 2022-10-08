@@ -15,8 +15,8 @@ export class History extends BaseEntity{
     @OneToOne(()=>Note)
     note_id!: number;
 
-    @Column({type: 'date'})
-    date!: Date;
+    // @Column({type: 'date'})
+    // date!: Date;
 
 
 }
