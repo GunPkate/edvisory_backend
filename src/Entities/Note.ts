@@ -7,6 +7,7 @@ export class Note extends BaseEntity{
     @PrimaryGeneratedColumn("increment")
     id!: number;
     
+    @Column({type: 'int'})
     @OneToOne(()=>Customer)
     customer_id!: number;
     

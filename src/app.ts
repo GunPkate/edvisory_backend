@@ -59,8 +59,26 @@ const main = async () => {
                 resultcode:50000,
                 resultDescription: error
             })
+        }          
+    })
+
+    app.post('/note_orm/create',(req:Request,res:Response)=>{
+        try {
+            Note.insert({
+                customer_id: 1,
+                title: 'hello',
+                content: 'hello world',
+            })
+            res.status(200).json({
+                resultcode:20000,
+                resultDescription: "note created"
+            })
+        } catch (error) {
+            res.status(500).json({
+                resultcode:50000,
+                resultDescription: error
+            })
         }
-            
     })
 
 
