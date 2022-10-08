@@ -1,14 +1,13 @@
+import { Category } from './../Entities/Category';
 import express,{Router,Request,Response} from 'express'
-import { Note } from "../Entities/Note"
 
 export const note_orm:Router = express.Router();
 
-note_orm.post('/note_orm/create',(req:Request,res:Response)=>{
+note_orm.post('/note_orm2/create',(req:Request,res:Response)=>{
     try {
-        Note.insert({
-            customer_id: 1,
-            title: 'hello',
-            content: 'hello world',
+        Category.insert({
+            id: 1,
+            titlename: 'hello',
         })
         res.status(200).json({
             resultcode:20000,
@@ -23,7 +22,7 @@ note_orm.post('/note_orm/create',(req:Request,res:Response)=>{
 })
 
 note_orm.get('/note_orm/getall',(req:Request,res:Response)=>{
-    Note.find().then((data)=>{
+    Category.find().then((data)=>{
         res.status(200).json({
             resultcode:20000,
             resultDescription: data
