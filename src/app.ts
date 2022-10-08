@@ -1,7 +1,5 @@
-import { DataSource, Entity } from 'typeorm';
 import express,{ Application,Request,Response} from "express";
-import { Customer } from './Entities/Customer';
-import { Note } from './Entities/Note';
+import { main } from './sqlconnect';
 const port:number = 5000 
 const app:Application = express();
 
@@ -12,80 +10,12 @@ app.get('/text',(req:Request,res:Response) =>{
 
 // import {customer} from './Routes/customer'
 // app.use(customer)
-
-// import {note_orm} from './Routes/note_orm'
-// app.use(note_orm)
-
-const main = async () => {
-
-    const dataSource = new DataSource({
-        "type": "mysql",
-        "host": "localhost",
-        "port": 3306,
-        "username": "admin1",
-        "password": "G7vd]8)TR.bT/BFe",
-        "database": "edvisory",
-        "synchronize": true,
-        "logging": true,
-        "entities": [Customer,Note],
-    })
-    console.log("connected");
-    
-
-
-    app.get('/customer_orm/get',(req:Request,res:Response)=>{
-        Customer.find({}).then((data)=>{
-            res.status(200).json({
-                resultcode:20000,
-                resultDescription: data
-            })
-        })
-    })
-
-    app.post('/customer_orm/create',(req:Request,res:Response)=>{
-        try {
-            Customer.insert({
-                firstName:"Gun",
-                lastName:"P",
-                email:"gun@p.com",
-                password:'1111'
-            })
-            res.status(200).json({
-                resultcode:20000,
-                resultDescription: "data created"
-            })
-        } catch (error) {
-            res.status(500).json({
-                resultcode:50000,
-                resultDescription: error
-            })
-        }          
-    })
-
-    app.post('/note_orm/create',(req:Request,res:Response)=>{
-        try {
-            Note.insert({
-                customer_id: 1,
-                title: 'hello',
-                content: 'hello world',
-            })
-            res.status(200).json({
-                resultcode:20000,
-                resultDescription: "note created"
-            })
-        } catch (error) {
-            res.status(500).json({
-                resultcode:50000,
-                resultDescription: error
-            })
-        }
-    })
-
-
-    // load entities, establish db connection, sync schema, etc.
-    await dataSource.initialize()
-    
-} 
-
 main()
+
+import {note_orm} from './Routes/note_orm'
+app.use(note_orm)
+
+import {customer_orm} from './Routes/customer_orm'
+app.use(customer_orm)
+    
 app.listen(port,() =>{console.log('Server running')})
