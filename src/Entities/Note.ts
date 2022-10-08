@@ -12,7 +12,7 @@ export class Note extends BaseEntity{
     customer_id!: number;
     
     @Column({type: 'varchar',length:500})
-    // @OneToMany(()=>Category)
+    @OneToOne(()=>Category)
     title!: string;
     
     @Column({type: 'varchar',length:500})

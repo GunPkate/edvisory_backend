@@ -1,4 +1,4 @@
-import { History } from './../Entities/History';
+import { History } from '../Entities/History';
 import express,{Router,Request,Response} from 'express'
 
 export const note_orm:Router = express.Router();

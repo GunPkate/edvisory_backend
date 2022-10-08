@@ -1,9 +1,9 @@
 import { Category } from './../Entities/Category';
 import express,{Router,Request,Response} from 'express'
 
-export const note_orm:Router = express.Router();
+export const category_orm:Router = express.Router();
 
-note_orm.post('/note_orm2/create',(req:Request,res:Response)=>{
+category_orm.post('/category_orm/create',(req:Request,res:Response)=>{
     try {
         Category.insert({
             id: 1,
@@ -21,7 +21,7 @@ note_orm.post('/note_orm2/create',(req:Request,res:Response)=>{
     }
 })
 
-note_orm.get('/note_orm/getall',(req:Request,res:Response)=>{
+category_orm.get('/category_orm/getall',(req:Request,res:Response)=>{
     Category.find().then((data)=>{
         res.status(200).json({
             resultcode:20000,
