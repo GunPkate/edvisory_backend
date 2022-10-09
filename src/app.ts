@@ -1,8 +1,18 @@
 import express,{ Application,Request,Response} from "express";
 import { main } from './sqlconnect';
+import cors from 'cors'
+
 const port:number = 5000 
 const app:Application = express();
 
+ /* CORS */
+const allowedOrigins = ['http://localhost:3000'];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+app.use(cors(options));
+app.use(express.json());
 
 app.get('/text',(req:Request,res:Response) =>{
     res.send('Hello Home')
