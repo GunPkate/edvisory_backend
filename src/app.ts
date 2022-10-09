@@ -30,5 +30,8 @@ app.use(customer_orm)
 
 import {category_orm} from './Routes/category_orm'
 app.use(category_orm)
+
+import {history_orm} from './Routes/history_orm'
+app.use(history_orm)
     
 app.listen(port,() =>{console.log('Server running')})
