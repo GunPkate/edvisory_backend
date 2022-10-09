@@ -14,14 +14,14 @@ customer_orm.get('/customer_orm/get',(req:Request,res:Response)=>{
 
 customer_orm.post('/customer_orm/create',async (req:Request,res:Response)=>{
     try {
-        // console.log(req.body)
+        console.log(req.body)
         let input = req.body
         let  findresult = await Customer.find({
-           
+           where:{email:input.email}
         })
-        // console.log(findresult);
+        // console.log(findresult,12345);
         
-        if(!findresult){
+        if(findresult.length==0){
             const data = Customer.insert({
                 firstName: input.firstName,
                 lastName:  input.lastName,
@@ -31,7 +31,7 @@ customer_orm.post('/customer_orm/create',async (req:Request,res:Response)=>{
             res.status(200).json({
                 resultcode:20000,
                 resultDescription: "data created",
-                resultData: data
+                resultData: input
             })
         }else{
             res.status(400).json({
