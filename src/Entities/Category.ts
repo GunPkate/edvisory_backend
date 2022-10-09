@@ -9,7 +9,7 @@ export class Category extends BaseEntity{
     @ManyToOne(()=>Note,note=>note.category)
     @JoinColumn()
     note!:Note
-
-
-
+    
+    @Column({type: 'varchar',length:50})
+    title!: string;
 }

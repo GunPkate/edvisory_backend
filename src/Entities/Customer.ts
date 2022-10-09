@@ -5,7 +5,7 @@ import { History } from "./History";
 @Entity({name: "customer"})
 export class Customer extends BaseEntity{
     @PrimaryGeneratedColumn("increment")
-    customer_id!: number;
+    id!: number;
 
     @Column({type: 'varchar',length:50})
     firstName!: string;
