@@ -7,7 +7,7 @@ category_orm.post('/category_orm/create',(req:Request,res:Response)=>{
     try {
         Category.insert({
             id: 1,
-            titlename: 'hello',
+            title: 'hello',
         })
         res.status(200).json({
             resultcode:20000,

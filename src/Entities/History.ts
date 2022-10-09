@@ -11,9 +11,9 @@ export class History extends BaseEntity{
     @OneToOne(()=>Customer)
     customer_id!: number;
 
-    @Column({type: 'int'})
-    @OneToOne(()=>Note)
-    note_id!: number;
+    // @Column({type: 'int'})
+    // @OneToOne(()=>Note)
+    // note_id!: number;
 
     // @Column({type: 'date'})
     // date!: Date;

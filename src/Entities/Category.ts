@@ -7,7 +7,7 @@ export class Category extends BaseEntity{
     id!: number;
     @Column({type: 'varchar',length:50})
     @OneToOne(()=>Note)
-    titlename!: string;
+    title!: string;
 
 
 

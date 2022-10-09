@@ -16,7 +16,8 @@ export class Note extends BaseEntity{
     title!: string;
     
     @Column({type: 'varchar',length:500})
-    content!: string;
+    text!: string;
 
-
+    @Column({type: 'varchar',length:500})
+    date!: Date;
 }
