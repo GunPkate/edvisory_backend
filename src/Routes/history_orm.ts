@@ -6,7 +6,7 @@ export const history_orm:Router = express.Router();
 history_orm.post('/history_orm/create',(req:Request,res:Response)=>{
     try {
         History.insert({
-            customer_id: 1,
+            // customer_id: 1,
             // note_id: 1,
             // date: Date.now(),
         })

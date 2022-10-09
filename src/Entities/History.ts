@@ -7,10 +7,8 @@ export class History extends BaseEntity{
     @PrimaryGeneratedColumn("increment")
     id!: number;
 
-    @Column({type: 'int'})
-    @OneToOne(()=>Customer)
-    customer_id!: number;
-
+    @OneToOne(()=>Note,note=>note.history)
+    note!:Note
     // @Column({type: 'int'})
     // @OneToOne(()=>Note)
     // note_id!: number;

@@ -24,8 +24,8 @@ note_orm.post('/note_orm/create',(req:Request,res:Response)=>{
                 customer_id: input.Customer_id,
                 title: str_title,
                 text: str_txt,
-            date: new Date(Date.now())
-        }
+                date: new Date(Date.now())
+            }
         Note.insert(new_data)
         res.status(200).json({
             resultcode:20000,

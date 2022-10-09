@@ -5,8 +5,6 @@ import { History } from "./History";
 @Entity({name: "customer"})
 export class Customer extends BaseEntity{
     @PrimaryGeneratedColumn("increment")
-    @OneToOne(()=>Note)
-
     customer_id!: number;
 
     @Column({type: 'varchar',length:50})
@@ -20,4 +18,7 @@ export class Customer extends BaseEntity{
 
     @Column({type: 'varchar',length:50})
     password!: string;
+
+    @OneToOne(()=>Note,note=>note.customer)
+    note!: Note
 }
