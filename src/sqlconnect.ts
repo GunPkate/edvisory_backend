@@ -4,7 +4,7 @@ import { Customer } from "./Entities/Customer";
 import { History } from "./Entities/History";
 import { Note } from "./Entities/Note";
 
-export const main = async () => {
+
 
     const dataSource = new DataSource({
         "type": "mysql",
@@ -18,5 +18,7 @@ export const main = async () => {
         "entities": [Customer,Note,Category,History],
     })
     console.log("connected");
-    await dataSource.initialize()
-} 
+    dataSource.initialize()
+
+
+export default dataSource

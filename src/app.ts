@@ -1,5 +1,5 @@
 import express,{ Application,Request,Response} from "express";
-import { main } from './sqlconnect';
+import dataSource from './sqlconnect';
 import cors from 'cors'
 
 const port:number = 5000 
@@ -20,7 +20,7 @@ app.get('/text',(req:Request,res:Response) =>{
 
 // import {customer} from './Routes/customer'
 // app.use(customer)
-main()
+dataSource
 
 import {note_orm} from './Routes/note_orm'
 app.use(note_orm)

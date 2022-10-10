@@ -22,10 +22,16 @@ export class Note extends BaseEntity{
     @JoinColumn()
     customer!: Customer
 
-    @OneToMany(()=>Category,category=>category.note)
+    @Column({type: 'int'})
+    category_id!: number;
+    @OneToOne(()=>Category,category=>category.note,{onDelete: "CASCADE"})
+    @JoinColumn()
     category!:Category[]
     
-    @OneToMany(()=>History,history=>history.note)  
+    @Column({type: 'int'})
+    date_id!: number;
+    @OneToOne(()=>History,history=>history.note,{onDelete: "CASCADE"})
+    @JoinColumn()
     history!: History;
 
 

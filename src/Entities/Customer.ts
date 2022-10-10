@@ -1,6 +1,6 @@
 import { Entity,Column,PrimaryGeneratedColumn, BaseEntity, OneToOne } from "typeorm";
-import { Note } from "./Note";
-import { History } from "./History";
+import { Note } from "../Entities/Note";
+import { History } from "../Entities/History";
 
 @Entity({name: "customer"})
 export class Customer extends BaseEntity{
