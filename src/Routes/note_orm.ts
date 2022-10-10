@@ -60,15 +60,16 @@ note_orm.post('/note_orm/create',async(req:Request,res:Response)=>{
     }
 })
 
-note_orm.get('/note_orm/getall',(req:Request,res:Response)=>{
-    Note.find().then((data)=>{
+note_orm.get('/note_orm/getall',async(req:Request,res:Response)=>{
+    let  result = await dataSource.query('SELECT n.id,c.title,text ,n.date_id FROM `note` as n JOIN category as c on n.category_id = c.id JOIN history as h on n.date_id = h.id')
+
+    // Note.find().then((data)=>{
         res.status(200).json({
             resultcode:20000,
             resultDescription: "note created",
-            resultData: data
+            resultData: result
         })
-    })
-    // dataSource.createQueryBuilder().select("*").from(Note)
+    // })
 })
 
 note_orm.delete('/note_orm/delete',async (req:Request,res:Response)=>{
