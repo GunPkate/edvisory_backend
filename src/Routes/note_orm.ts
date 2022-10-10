@@ -1,10 +1,9 @@
-import { JoinColumn } from 'typeorm';
 import { Customer } from './../Entities/Customer';
 import express,{Router,Request,Response} from 'express'
 import { Note } from "../Entities/Note"
 import { History } from '../Entities/History';
 import { Category } from '../Entities/Category';
-import { DataSource } from 'typeorm';
+
 import dataSource from '../sqlconnect';
 
 export const note_orm:Router = express.Router();
@@ -96,7 +95,61 @@ note_orm.delete('/note_orm/delete',async (req:Request,res:Response)=>{
             resultDescription: error
         })
     }
-    
+})
 
+note_orm.put('/note_orm/update',async (req:Request,res:Response)=>{
+    try {
+        let input = req.body
+        let cat_id =[]
+        let  check = await Note.find({
+            where:{id:req.body.id}
+         })
+
+        for (let i of check){
+            cat_id.push(i)
+        }
+
+        console.log(check[0]['id'])
+        if(check.length >0){
+            let str_txt = input.text
+            let str_title = input.title
+            const ngwords = ["shit", "fuck", "bad","not good","lazy"];
+            for (let i of ngwords){
+                let word = i.length
+                let cen = ''
+                for(let y=0; y <word;y++){cen += '*'}
+                str_txt = str_txt.replace(i,i?cen:i)
+                str_title = str_title.replace(i,i?cen:i)
+            }
+
+            await dataSource.query(`UPDATE note SET text = '${str_txt}' where id = ${check[0]['id']};`)
+            await dataSource.query(`UPDATE category set title = '${str_title}' where id = ${check[0]['category_id']};`)
+            await dataSource.query(`UPDATE history set date = '${new Date(Date.now()).toDateString()}' where id = ${check[0]['date_id']};`)
+            
+            let result =await dataSource.query(
+                `SELECT n.id,c.title,text,h.date ,n.date_id `+
+                `FROM note as n `+
+                `JOIN category as c on n.category_id = c.id `+
+                `JOIN history as h on n.date_id = h.id `+
+                `where n.id = ${check[0]['id']}`
+            )
+                res.status(200).json({
+                    resultcode:20000,
+                    resultDescription: "this is updated",
+                    resultData: result
+                })
+
+        }else{
+            res.status(400).json({
+                resultcode:40000,
+                resultDescription: "data not found"
+            }) 
+        }
+    } catch (error) {
+        res.status(500).json({
+            resultcode:50000,
+            resultDescription: error
+        })
+    }
 })
 
